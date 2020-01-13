@@ -4,7 +4,7 @@ This is a GUI tool based on Qt to display CT DICOM images and convert it to file
 ## CT_gui.py(ui)
 Main GUI file and the UI file from Qt Designer.
 
-![Image] https://github.com/xiaosj/CT-DICOM-GUI/tree/master/pictures/screen_cut.png
+![Image](https://github.com/xiaosj/CT-DICOM-GUI/raw/master/pictures/screen_cut.png)
 
 ## ct_image.py
 The class to handle DICOM files and data format conversion.  This class can also be used independently with the GUI.
