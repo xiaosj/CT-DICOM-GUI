@@ -6,51 +6,45 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1038</width>
-    <height>813</height>
+    <width>820</width>
+    <height>780</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>DICOM-IMG Tool</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="botton_open_folder">
     <property name="geometry">
      <rect>
-      <x>710</x>
+      <x>10</x>
       <y>10</y>
-      <width>110</width>
+      <width>161</width>
       <height>30</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Open DICOM Folder</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelFolder">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>60</y>
-      <width>281</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="wordWrap">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QPushButton" name="botton_open_file">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>10</y>
-      <width>110</width>
+      <x>10</x>
+      <y>30</y>
+      <width>161</width>
       <height>30</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Open .img File</string>
@@ -59,11 +53,16 @@
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>370</y>
-      <width>271</width>
-      <height>16</height>
+      <x>10</x>
+      <y>130</y>
+      <width>800</width>
+      <height>20</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -72,105 +71,105 @@
    <widget class="QSpinBox" name="spinBox_x1">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>440</y>
+      <x>660</x>
+      <y>40</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_x2">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>470</y>
+      <x>720</x>
+      <y>40</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_y1">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>440</y>
+      <x>660</x>
+      <y>70</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_y2">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>470</y>
+      <x>720</x>
+      <y>70</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_z1">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>440</y>
+      <x>660</x>
+      <y>100</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_z2">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>470</y>
+      <x>720</x>
+      <y>100</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>390</y>
+      <x>450</x>
+      <y>40</y>
       <width>21</width>
-      <height>16</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -180,15 +179,15 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>840</x>
-      <y>390</y>
+      <x>450</x>
+      <y>70</y>
       <width>21</width>
-      <height>16</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -198,15 +197,15 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>390</y>
+      <x>450</x>
+      <y>100</y>
       <width>21</width>
-      <height>16</height>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -216,15 +215,15 @@
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>440</y>
-      <width>46</width>
-      <height>16</height>
+      <x>650</x>
+      <y>10</y>
+      <width>55</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
@@ -234,15 +233,15 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>470</y>
-      <width>48</width>
-      <height>16</height>
+      <x>710</x>
+      <y>10</y>
+      <width>60</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
@@ -252,60 +251,60 @@
    <widget class="QSpinBox" name="spinBox_z0">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>410</y>
+      <x>470</x>
+      <y>100</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_x0">
     <property name="geometry">
      <rect>
-      <x>760</x>
-      <y>410</y>
+      <x>470</x>
+      <y>40</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_y0">
     <property name="geometry">
      <rect>
-      <x>820</x>
-      <y>410</y>
+      <x>470</x>
+      <y>70</y>
       <width>50</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>410</y>
-      <width>40</width>
-      <height>16</height>
+      <x>450</x>
+      <y>10</y>
+      <width>50</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>14</pointsize>
      </font>
     </property>
     <property name="text">
@@ -315,62 +314,103 @@
    <widget class="QTableWidget" name="table_DICOM">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>121</y>
-      <width>271</width>
-      <height>181</height>
+      <x>170</x>
+      <y>10</y>
+      <width>261</width>
+      <height>121</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
+    </property>
+    <property name="dragDropOverwriteMode">
+     <bool>false</bool>
+    </property>
+    <property name="columnCount">
+     <number>0</number>
+    </property>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
    </widget>
    <widget class="QPushButton" name="botton_write_img">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>900</x>
-      <y>510</y>
-      <width>55</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Create</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>510</y>
-      <width>90</width>
+      <x>80</x>
+      <y>83</y>
+      <width>91</width>
       <height>30</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
-     <string>Img File Name:</string>
+     <string>Cut &amp;&amp; Save</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>790</x>
-      <y>510</y>
-      <width>110</width>
+      <x>20</x>
+      <y>80</y>
+      <width>61</width>
       <height>30</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Save .img:</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_imgFilename">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>141</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QPushButton" name="botton_open_dose">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>570</y>
-      <width>110</width>
+      <x>10</x>
+      <y>50</y>
+      <width>161</width>
       <height>30</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Open Dose File</string>
@@ -379,61 +419,136 @@
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>550</y>
-      <width>271</width>
-      <height>16</height>
+      <x>430</x>
+      <y>10</y>
+      <width>20</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QSlider" name="hSlider_x0">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>40</y>
+      <width>100</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_show_HU">
+   <widget class="QSlider" name="hSlider_y0">
     <property name="geometry">
      <rect>
-      <x>700</x>
-      <y>320</y>
-      <width>81</width>
-      <height>17</height>
+      <x>520</x>
+      <y>70</y>
+      <width>100</width>
+      <height>20</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Show HU at</string>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QSpinBox" name="spinBox_nHU">
+   <widget class="QSlider" name="hSlider_z0">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>320</y>
-      <width>40</width>
+      <x>520</x>
+      <y>100</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>40</y>
+      <width>21</width>
       <height>20</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
-    <property name="maximum">
-     <number>200</number>
-    </property>
-    <property name="value">
-     <number>20</number>
+    <property name="text">
+     <string>X</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_8">
+   <widget class="QLabel" name="label_10">
     <property name="geometry">
      <rect>
-      <x>830</x>
-      <y>320</y>
-      <width>81</width>
-      <height>16</height>
+      <x>640</x>
+      <y>100</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Z</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>70</y>
+      <width>21</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Y</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>10</y>
+      <width>20</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_center_lines">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>10</y>
+      <width>91</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>random points</string>
+     <string>Show Lines</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>

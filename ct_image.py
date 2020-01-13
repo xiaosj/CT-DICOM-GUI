@@ -12,8 +12,8 @@ class ct_img:
         self.dx = self.dy = self.dz = np.float32(0.0)
         self.prefix = prefix
         self.havedose = False
-        return
-
+ 
+ 
     def __init__(self, ct_input, prefix='ct'):
         self.prefix = prefix
         self.havedose = False
@@ -25,7 +25,7 @@ class ct_img:
             self.read_img(ct_input)
         else:
             raise Exception('Cannot find {:}'.format(ct_input))
-        return
+
 
     def dicom2img(self, ct_dir):
         os.chdir(ct_dir)
@@ -50,8 +50,6 @@ class ct_img:
             ds = pydicom.dcmread(files[i])
             self.voxel[i,:,:] = ds.pixel_array
 
-        return
-
 
     def voxel_info(self):
         info = '({:d}, {:d}, {:d}) voxels with ({:.3f}, {:.3f}, {:.3f}) mm size'.format(self.nx, self.ny, self.nz, self.dx, self.dy, self.dz)
@@ -63,7 +61,6 @@ class ct_img:
             self.nx, self.ny, self.nz = struct.unpack('iii', f.read(12))
             self.dx, self.dy, self.dz = struct.unpack('fff', f.read(12))
             self.voxel = np.fromfile(f, dtype=np.int16, count=self.nx*self.ny*self.nz).reshape(self.nz, self.ny, self.nx)
-        return
 
 
     def write_img(self, img_file):
@@ -72,16 +69,16 @@ class ct_img:
             f.write(struct.pack('fff', self.dx, self.dy, self.dz))
             f.write(self.voxel.tobytes())
             f.close()
-        return
-
+ 
 
     def read_dose(self, dose_file, verbose=False):
         with open(dose_file, 'rb') as f:
             nx, ny, nz = struct.unpack('iii', f.read(12))
             dx, dy, dz = struct.unpack('fff', f.read(12))
             if(nx != self.nx or ny != self.ny or nz != self.nz or dx != self.dx or dy != self.dy or dz !=self.dz):
-                print('Image: ({:d}, {:d}, {:d}) at ({:.3f}, {:.3f}, {:.3f}) mm'.format(self.nx, self.ny, self.nz, self.dx, self.dy, self.dz))
-                print('Dose:  ({:d}, {:d}, {:d}) at ({:.3f}, {:.3f}, {:.3f}) mm'.format(nx, ny, nz, dx, dy, dz))
+                if verbose:
+                    print('Image: ({:d}, {:d}, {:d}) at ({:.3f}, {:.3f}, {:.3f}) mm'.format(self.nx, self.ny, self.nz, self.dx, self.dy, self.dz))
+                    print('Dose:  ({:d}, {:d}, {:d}) at ({:.3f}, {:.3f}, {:.3f}) mm'.format(nx, ny, nz, dx, dy, dz))
                 raise Exception('Error: the image and dose voxels do not match.')
             self.dose_x, self.dose_z, self.dose_e = struct.unpack('iif', f.read(12))
             self.dose_x0, self.dose_x1 = struct.unpack('ii', f.read(8))
@@ -95,7 +92,6 @@ class ct_img:
             self.dose[self.dose_z0:self.dose_z1+1,:,self.dose_x0:self.dose_x1+1] = np.fromfile(f, dtype=np.float32, count=dose_nx*self.ny*dose_nz).reshape(dose_nz, self.ny, dose_nx)
             self.dose_pct = self.dose / (self.dose.max() * 0.01)
             self.havedose = True
-        return
 
 
     def polt3views(self, ix=None, iy=None, iz=None, showdose=True, savefig=False):
@@ -145,4 +141,3 @@ class ct_img:
         if savefig:
             plt.savefig(self.prefix + '_{:}-{:}-{:}.png'.format(ix, iy, iz))
         plt.show()
-        return

@@ -6,3 +6,6 @@
 
 # Python
 __pycache__
+
+# Test files
+*.img
