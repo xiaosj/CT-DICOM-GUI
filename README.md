@@ -12,3 +12,9 @@ The class to handle DICOM files and data format conversion.  This class can also
 ## Dependence
 * `pydicom`
 * `PyQt5`
+
+
+## img_resize.c
+A C-program (for performance) to resample voxel based the volume-average.
+
+Usage: `img_resize [img_file] [new_dx] [new_dy] [new_dz]`. The new voxel sizes are in the unit of mm.
