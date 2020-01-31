@@ -155,6 +155,7 @@ class myApp(QMainWindow):
                 self.spinBox_x0.setValue(self.ct.dose_x)
                 self.spinBox_z0.setValue(self.ct.dose_z)
                 self.with_dose = True
+                self.checkBox_center_lines.setChecked(False)
                 self.display(True)
             except Exception as e:
                 self.showMsg(str(e))
@@ -259,77 +260,86 @@ class myApp(QMainWindow):
 
 
     def display(self, enforce_refresh=False):
-        if not self.hold_display_refresh or enforce_refresh:
-            self.hold_display_refresh = False
-            if self.firstDraw:
-                self.pxy = self.fig.add_subplot(1, 2, 1)
-                self.pxz = self.fig.add_subplot(2, 2, 2)
-                self.pyz = self.fig.add_subplot(2, 2, 4)
-                self.firstDraw = False
-            else:
-                self.pxy.clear()
-                self.pxz.clear()
-                self.pyz.clear()
+        if self.hold_display_refresh and not enforce_refresh:
+            return
+        
+        self.hold_display_refresh = False
+        self.fig.clear()
+        self.pxy = self.fig.add_subplot(1, 2, 1)
+        self.pxz = self.fig.add_subplot(2, 2, 2)
+        self.pyz = self.fig.add_subplot(2, 2, 4)
+        # if self.firstDraw:
+        #     self.pxy = self.fig.add_subplot(1, 2, 1)
+        #     self.pxz = self.fig.add_subplot(2, 2, 2)
+        #     self.pyz = self.fig.add_subplot(2, 2, 4)
+        #     self.firstDraw = False
+        # else:
+        #     self.pxy.clear()
+        #     self.pxz.clear()
+        #     self.pyz.clear()
+        #     try:  self.cb.clear()
+        #     except: pass
 
-            x0 = self.spinBox_x0.value()
-            y0 = self.spinBox_y0.value()
-            z0 = self.spinBox_z0.value()
-            self.pxy.imshow(self.ct.voxel[z0,:,:], cmap='gray', aspect=self.ct.dy/self.ct.dx)
-            self.pxz.imshow(self.ct.voxel[:,y0,:], cmap='gray', aspect=self.ct.dz/self.ct.dx)
-            self.pyz.imshow(self.ct.voxel[:,:,x0], cmap='gray', aspect=self.ct.dz/self.ct.dy)
+        x0 = self.spinBox_x0.value()
+        y0 = self.spinBox_y0.value()
+        z0 = self.spinBox_z0.value()
+        self.pxy.imshow(self.ct.voxel[z0,:,:], cmap='gray', aspect=self.ct.dy/self.ct.dx)
+        self.pxz.imshow(self.ct.voxel[:,y0,:], cmap='gray', aspect=self.ct.dz/self.ct.dx)
+        self.pyz.imshow(self.ct.voxel[:,:,x0], cmap='gray', aspect=self.ct.dz/self.ct.dy)
 
-            self.pxy.set_xlabel('X')
-            self.pxy.set_ylabel('Y')
-            self.pxy.set_title('Z = {:d}'.format(self.spinBox_z0.value()))
-            
-            self.pxz.set_xlabel('X')
-            self.pxz.set_ylabel('Z')
-            self.pxz.set_title('Y = {:d}'.format(self.spinBox_y0.value()))
+        self.pxy.set_xlabel('X')
+        self.pxy.set_ylabel('Y')
+        self.pxy.set_title('Z = {:d}'.format(self.spinBox_z0.value()))
+        
+        self.pxz.set_xlabel('X')
+        self.pxz.set_ylabel('Z')
+        self.pxz.set_title('Y = {:d}'.format(self.spinBox_y0.value()))
 
-            self.pyz.set_xlabel('Y')
-            self.pyz.set_ylabel('Z')
-            self.pyz.set_title('X = {:d}'.format(self.spinBox_x0.value()))
-            
-            # draw display center lines
-            if self.checkBox_center_lines.isChecked():
-                color = 'white'
-                self.pxy.plot([0, self.ct.nx-1], [y0, y0], color=color, linestyle='--')
-                self.pxy.plot([x0, x0], [0, self.ct.ny-1], color=color, linestyle='--')
-                self.pxz.plot([0, self.ct.nx-1], [z0, z0], color=color, linestyle='--')
-                self.pxz.plot([x0, x0], [0, self.ct.nz-1], color=color, linestyle='--')
-                self.pyz.plot([0, self.ct.ny-1], [z0, z0], color=color, linestyle='--')
-                self.pyz.plot([y0, y0], [0, self.ct.nz-1], color=color, linestyle='--')
+        self.pyz.set_xlabel('Y')
+        self.pyz.set_ylabel('Z')
+        self.pyz.set_title('X = {:d}'.format(self.spinBox_x0.value()))
+        
+        # draw display center lines
+        if self.checkBox_center_lines.isChecked():
+            color = 'white'
+            self.pxy.plot([0, self.ct.nx-1], [y0, y0], color=color, linestyle='--')
+            self.pxy.plot([x0, x0], [0, self.ct.ny-1], color=color, linestyle='--')
+            self.pxz.plot([0, self.ct.nx-1], [z0, z0], color=color, linestyle='--')
+            self.pxz.plot([x0, x0], [0, self.ct.nz-1], color=color, linestyle='--')
+            self.pyz.plot([0, self.ct.ny-1], [z0, z0], color=color, linestyle='--')
+            self.pyz.plot([y0, y0], [0, self.ct.nz-1], color=color, linestyle='--')
 
-            # draw cut lines
-            cutcol = 'cyan'
-            x1 = self.spinBox_x1.value()
-            x2 = self.spinBox_x2.value()
-            y1 = self.spinBox_y1.value()
-            y2 = self.spinBox_y2.value()
-            z1 = self.spinBox_z1.value()
-            z2 = self.spinBox_z2.value()
-            self.pxy.plot([x1, x2], [y1, y1], color=cutcol, linestyle=':')
-            self.pxy.plot([x1, x2], [y2, y2], color=cutcol, linestyle=':')
-            self.pxy.plot([x1, x1], [y1, y2], color=cutcol, linestyle=':')
-            self.pxy.plot([x2, x2], [y1, y2], color=cutcol, linestyle=':')
-            self.pxz.plot([x1, x2], [z1, z1], color=cutcol, linestyle=':')
-            self.pxz.plot([x1, x2], [z2, z2], color=cutcol, linestyle=':')
-            self.pxz.plot([x1, x1], [z1, z2], color=cutcol, linestyle=':')
-            self.pxz.plot([x2, x2], [z1, z2], color=cutcol, linestyle=':')
-            self.pyz.plot([y1, y2], [z1, z1], color=cutcol, linestyle=':')
-            self.pyz.plot([y1, y2], [z2, z2], color=cutcol, linestyle=':')
-            self.pyz.plot([y1, y1], [z1, z2], color=cutcol, linestyle=':')
-            self.pyz.plot([y2, y2], [z1, z2], color=cutcol, linestyle=':')
+        # draw cut lines
+        cutcol = 'cyan'
+        x1 = self.spinBox_x1.value()
+        x2 = self.spinBox_x2.value()
+        y1 = self.spinBox_y1.value()
+        y2 = self.spinBox_y2.value()
+        z1 = self.spinBox_z1.value()
+        z2 = self.spinBox_z2.value()
+        self.pxy.plot([x1, x2], [y1, y1], color=cutcol, linestyle=':')
+        self.pxy.plot([x1, x2], [y2, y2], color=cutcol, linestyle=':')
+        self.pxy.plot([x1, x1], [y1, y2], color=cutcol, linestyle=':')
+        self.pxy.plot([x2, x2], [y1, y2], color=cutcol, linestyle=':')
+        self.pxz.plot([x1, x2], [z1, z1], color=cutcol, linestyle=':')
+        self.pxz.plot([x1, x2], [z2, z2], color=cutcol, linestyle=':')
+        self.pxz.plot([x1, x1], [z1, z2], color=cutcol, linestyle=':')
+        self.pxz.plot([x2, x2], [z1, z2], color=cutcol, linestyle=':')
+        self.pyz.plot([y1, y2], [z1, z1], color=cutcol, linestyle=':')
+        self.pyz.plot([y1, y2], [z2, z2], color=cutcol, linestyle=':')
+        self.pyz.plot([y1, y1], [z1, z2], color=cutcol, linestyle=':')
+        self.pyz.plot([y2, y2], [z1, z2], color=cutcol, linestyle=':')
 
-            # draw dose when exists
-            if self.with_dose:
-                levels = [0.02, 0.1, 1, 10, 100]
-                self.pxy.contourf(self.ct.dose_pct[z0,:,:], levels=levels, norm=LogNorm(), cmap='jet', alpha=0.5)
-                self.pxz.contourf(self.ct.dose_pct[:,y0,:], levels=levels, norm=LogNorm(), cmap='jet', alpha=0.5)
-                self.pyz.contourf(self.ct.dose_pct[:,:,x0], levels=levels, norm=LogNorm(), cmap='jet', alpha=0.5)
+        # draw dose when exists
+        if self.with_dose:
+            levels = [0.1, 1, 2, 5, 10, 20, 50, 100]
+            im = self.pxy.contourf(self.ct.dose_pct[z0,:,:], levels=levels, norm=LogNorm(), cmap='jet', alpha=0.5)
+            self.fig.colorbar(im, ax=self.pxy, orientation='horizontal')
+            self.pxz.contourf(self.ct.dose_pct[:,y0,:], levels=levels, norm=LogNorm(), cmap='jet', alpha=0.5)
+            self.pyz.contourf(self.ct.dose_pct[:,:,x0], levels=levels, norm=LogNorm(), cmap='jet', alpha=0.5)
 
-            plt.tight_layout()
-            self.canvas.draw()
+        plt.tight_layout()
+        self.canvas.draw()
 
 
 if __name__ == "__main__":
