@@ -88,7 +88,8 @@ class myApp(QMainWindow):
                 self.ct = ct_img(self.folder)
                 self.hold_display_refresh = True
 
-                self.setWindowTitle(self.defaultWindowTitle + ': ' + self.folder)
+                self.dicom_name = self.folder
+                self.setWindowTitle(self.defaultWindowTitle + ': ' + self.dicom_name)
 
                 self.table_DICOM.setRowCount(5)
                 self.table_DICOM.setItem(0, 0, QTableWidgetItem('Voxel Num'))
@@ -126,7 +127,8 @@ class myApp(QMainWindow):
             self.ct = ct_img(filename)
             self.hold_display_refresh = True
 
-            self.setWindowTitle(self.defaultWindowTitle + ': ' + os.path.basename(filename))
+            self.dicom_name = os.path.basename(filename)
+            self.setWindowTitle(self.defaultWindowTitle + ': ' + self.dicom_name)
             self.lineEdit_imgFilename.setText(os.path.basename(filename))
             self.botton_write_img.setEnabled(True)
             self.botton_open_dose.setEnabled(True)
@@ -148,7 +150,7 @@ class myApp(QMainWindow):
         if filename:
             try:
                 self.ct.read_dose(filename)
-                self.setWindowTitle(self.windowTitle() + ' + ' + os.path.basename(filename))
+                self.setWindowTitle(self.defaultWindowTitle + ': ' + self.dicom_name + ' + ' + os.path.basename(filename))
                 self.hold_display_refresh = True
                 self.spinBox_x0.setValue(self.ct.dose_x)
                 self.spinBox_z0.setValue(self.ct.dose_z)
