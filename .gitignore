@@ -9,3 +9,7 @@ __pycache__
 
 # Test files
 *.img
+
+# Executable file
+*.e
+ct-gui.sh

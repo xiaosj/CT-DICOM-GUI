@@ -80,6 +80,13 @@ class myApp(QMainWindow):
         msg.exec()
 
 
+    def yesnoMsg(self, text):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        check = msg.question(self, 'Warning', text, msg.Yes | msg.No)
+        return check == msg.Yes
+
+
     def openFolder(self):
         self.folder = QFileDialog.getExistingDirectory(self, 'Select Directory', '.')
         if self.folder:
@@ -90,6 +97,7 @@ class myApp(QMainWindow):
 
                 self.dicom_name = self.folder
                 self.setWindowTitle(self.defaultWindowTitle + ': ' + self.dicom_name)
+                self.botton_write_img.setEnabled(True)
 
                 self.table_DICOM.setRowCount(5)
                 self.table_DICOM.setItem(0, 0, QTableWidgetItem('Voxel Num'))
@@ -102,6 +110,9 @@ class myApp(QMainWindow):
                 self.table_DICOM.setItem(2, 1, QTableWidgetItem('{:}'.format(ds.RescaleSlope)))
                 self.table_DICOM.setItem(3, 0, QTableWidgetItem('Rescale Intercept'))
                 self.table_DICOM.setItem(3, 1, QTableWidgetItem('{:}'.format(ds.RescaleIntercept)))
+                if ds.RescaleIntercept != 0:  # rescale voxel data to make water HU=0
+                    self.ct.voxel += np.int16(ds.RescaleIntercept)
+
                 try:
                     rescale_type = '{:}'.format(ds.RescaleType)
                 except:
@@ -162,18 +173,24 @@ class myApp(QMainWindow):
 
 
     def saveImg(self):
+        '''Save img file.  Return True/False if file is/is-not saved.'''
+        save = False
         filename = os.path.join(self.folder, self.lineEdit_imgFilename.text())
+        if not filename.endswith('.img'):
+            filename += '.img'
+        
         if os.path.exists(filename):
-            self.showMsg(filename + ' already exists')
+            save = self.yesnoMsg(filename + ' already exists.\nDo you want to overwrite?')
         else:
+            save = True
+
+        if save:
             x1 = self.spinBox_x1.value()
             x2 = self.spinBox_x2.value()
             y1 = self.spinBox_y1.value()
             y2 = self.spinBox_y2.value()
             z1 = self.spinBox_z1.value()
             z2 = self.spinBox_z2.value()
-            if not filename.endswith('.img'):
-                filename += '.img'
 
             with open(filename, 'wb') as f:
                 f.write(struct.pack('iii', x2-x1+1, y2-y1+1, z2-z1+1))
@@ -181,6 +198,10 @@ class myApp(QMainWindow):
                 f.write(self.ct.voxel[z1:z2+1, y1:y2+1, x1:x2+1].tobytes())
                 f.close()
                 self.showMsg(filename + ' saved.', error=False)
+            return True
+        
+        else:  # No file is saved
+            return False
 
 
     def setDefaultPlanes(self):
