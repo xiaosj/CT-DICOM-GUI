@@ -7,24 +7,21 @@ from matplotlib.ticker import NullFormatter
 from matplotlib.colors import LogNorm
 
 class ct_img:
-    def __init__(self, prefix='ct'):
-        self.nx = self.ny = self.nz = 0
-        self.dx = self.dy = self.dz = np.float32(0.0)
+    def __init__(self, ct_input=None, prefix='ct'):
         self.prefix = prefix
         self.havedose = False
- 
- 
-    def __init__(self, ct_input, prefix='ct'):
-        self.prefix = prefix
-        self.havedose = False
-        if os.path.isdir(ct_input):     # combine dicom files into a single img file
-            self.dir = ct_input
-            self.dicom2img(ct_input)
-        elif os.path.isfile(ct_input):  # read processed img file
-            self.dir = os.path.dirname(ct_input)
-            self.read_img(ct_input)
+        if ct_input is None:
+            self.nx = self.ny = self.nz = 0
+            self.dx = self.dy = self.dz = np.float32(0.0)
         else:
-            raise Exception('Cannot find {:}'.format(ct_input))
+            if os.path.isdir(ct_input):     # combine dicom files into a single img file
+                self.dir = ct_input
+                self.dicom2img(ct_input)
+            elif os.path.isfile(ct_input):  # read processed img file
+                self.dir = os.path.dirname(ct_input)
+                self.read_img(ct_input)
+            else:
+                raise Exception('Cannot find {:}'.format(ct_input))
 
 
     def dicom2img(self, ct_dir):
